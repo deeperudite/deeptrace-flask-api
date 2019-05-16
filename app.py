@@ -4,7 +4,7 @@ import os
 from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/home/siddharth/Documents/Flask/DeepTrace-Flask-App/uploads/'
+UPLOAD_FOLDER = '/home/siddharth/deeptrace-flask-api/uploads/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'csv'])
 
 app = Flask(__name__)
@@ -42,12 +42,14 @@ def uploadfile():
         file = request.files['file']
 
         # Get the list of files to upload.
-        uploaded_files = request.files.listvalues()[0]
+        uploaded_files = request.files.getlist('file')
+        print("File : ", file)
+        print("Uploaded Files : ", uploaded_files)
 
         if file.filename == '':
             flash('No file selected for uploading')
             return redirect(request.url)
-        counter = 1
+        counter = 0
         length = len(uploaded_files)
         # Iterate over the list of files.
         for file in uploaded_files:
