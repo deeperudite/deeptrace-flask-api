@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>About Flask</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+    <h1>About DeepTrace </h1>
+    <p>We propose a generic framework for time-series forecasting called DeepTrace, which com-
+prises three main task-specific components - Convolutional Block, Recurrent Block, and Linear Block.
+The framework involves the use of these components in a specific order and is defined for certain permu-
+tations, described as architectural variants in the paper. We also introduce a novel training methodology
+of using future contextual frames to train the framework. The genericness of the framework is tested by
+evaluating the performance on real-world time series datasets across diverse domains. The future con-
+textual frames are dropped during the testing phase to simulate the real-world conditions, which helps
+us verify the robustness of DeepTrace in real-world scenarios. We use an optimizer to offset the loss
+incurred due to the non-provision of future contextual frames. We conducted substantial experiments
+by applying the proposed framework across the datasets considered and comparing the performance to
+benchmark results for those datasets. These experiments show the effectiveness of the proposed frame-
+work that outperforms the existing state-of-art methods.</p>
+    {% endblock %}
+  </body>
+</html>
