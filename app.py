@@ -1,8 +1,8 @@
-from flask import Flask, flash, render_template, request
-from werkzeug import secure_filename
-import os
-from flask import Flask, request, redirect, url_for
+from flask_restful import Resource, Api, reqparse
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
+import os
 
 UPLOAD_FOLDER = os.getcwd()+'/uploads/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'csv'])
@@ -10,59 +10,31 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'csv'])
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+api = Api(app)
+CORS(app)
+parser = reqparse.RequestParser()
 
+class DeepTracer(Resource):
 
-@app.route("/")
-def home():
-    return render_template("home.html")
+    def allowed_file(self, filename):
+        return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-@app.route('/upload', endpoint='uploadform')
-def uploadform():
-    return render_template('upload.html')
-
-
-@app.route('/upload', methods=['POST'], endpoint='uploadfile')
-def uploadfile():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-
+    def post(self):
+        parser.add_argument('split',type=str)
+        parser.add_argument('model',type=str)
+        args = parser.parse_args()
+        split = args['split']
+        model = args['model']
         file = request.files['file']
+        if file and self.allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            fs = "Uploaded"
+        else:
+            fs = "Not Uploaded"
+        return {'split':split, 'model': model, 'file': fs}
 
-        # Get the list of files to upload.
-        uploaded_files = request.files.getlist('file')
-        print("File : ", file)
-        print("Uploaded Files : ", uploaded_files)
+api.add_resource(DeepTracer, '/')
 
-        if file.filename == '':
-            flash('No file selected for uploading')
-            return redirect(request.url)
-        counter = 0
-        length = len(uploaded_files)
-        # Iterate over the list of files.
-        for file in uploaded_files:
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                counter += 1
-            if (counter == length):
-                flash('File(s) successfully uploaded')
-        return redirect('/upload')
-
-    return ""
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run()
