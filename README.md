@@ -1,2 +1,2 @@
 # deeptrace-flask-api
-Front End for the deployment of the DeepTrace Framework.
+Back End for the deployment of the DeepTrace Framework.
