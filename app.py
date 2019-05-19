@@ -1,6 +1,7 @@
 from flask_restful import Resource, Api, reqparse
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import pandas as pd
 from werkzeug.utils import secure_filename
 import os
 
@@ -29,10 +30,12 @@ class DeepTracer(Resource):
         if file and self.allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            data = pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            data = data.head().to_json(orient='index')
             fs = "Uploaded"
         else:
             fs = "Not Uploaded"
-        return {'split':split, 'model': model, 'file': fs}
+        return {'split':split, 'model': model, 'file': fs, 'data': data}
 
 api.add_resource(DeepTracer, '/')
 
