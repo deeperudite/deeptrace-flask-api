@@ -10,6 +10,8 @@ flask = "*"
 flask-api = "*"
 werkzeug = "*"
 gunicorn = "*"
+flask-restful = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"
