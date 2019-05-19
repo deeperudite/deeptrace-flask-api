@@ -32,6 +32,7 @@ class DeepTracer(Resource):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             data = pd.read_csv(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             data = data.head().to_json(orient='index')
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)
             fs = "Uploaded"
         else:
             fs = "Not Uploaded"
