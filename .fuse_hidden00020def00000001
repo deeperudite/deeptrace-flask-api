@@ -1,0 +1,25 @@
+[I 14:43:17.597 NotebookApp] JupyterLab extension loaded from /home/cern/anaconda3/lib/python3.7/site-packages/jupyterlab
+[I 14:43:17.598 NotebookApp] JupyterLab application directory is /home/cern/anaconda3/share/jupyter/lab
+[I 14:43:17.601 NotebookApp] Serving notebooks from local directory: /mnt/disk/Qaphy/Research/DeepTrace/flask-api
+[I 14:43:17.601 NotebookApp] The Jupyter Notebook is running at:
+[I 14:43:17.602 NotebookApp] http://localhost:8888/?token=467305431baf738bf42a8fc5eaf63bf38921e21b62165c80
+[I 14:43:17.602 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 14:43:17.649 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///run/user/1000/jupyter/nbserver-26130-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=467305431baf738bf42a8fc5eaf63bf38921e21b62165c80
+[I 14:44:22.180 NotebookApp] The port 8888 is already in use, trying another port.
+[I 14:44:22.207 NotebookApp] JupyterLab extension loaded from /home/cern/anaconda3/lib/python3.7/site-packages/jupyterlab
+[I 14:44:22.207 NotebookApp] JupyterLab application directory is /home/cern/anaconda3/share/jupyter/lab
+[I 14:44:22.209 NotebookApp] Serving notebooks from local directory: /mnt/disk/Qaphy/Research/DeepTrace/flask-api
+[I 14:44:22.209 NotebookApp] The Jupyter Notebook is running at:
+[I 14:44:22.209 NotebookApp] http://localhost:8889/?token=810e6e92b68da65d438238857889cd3155363982ff798b48
+[I 14:44:22.209 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 14:44:22.230 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///run/user/1000/jupyter/nbserver-26408-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8889/?token=810e6e92b68da65d438238857889cd3155363982ff798b48
